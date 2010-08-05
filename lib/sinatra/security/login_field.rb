@@ -43,7 +43,7 @@ module Sinatra
       
       def self.included(user)
         if @attr_name == :email
-          user.property LoginField.attr_name, String, :unique => true, :required => true, :format => EMAIL_FORMAT
+          user.property LoginField.attr_name, String, :unique => true, :required => true, :format => EMAIL_FORMAT. :length => 100
         else
           user.property LoginField.attr_name, String, :unique => true, :required => true
         end
