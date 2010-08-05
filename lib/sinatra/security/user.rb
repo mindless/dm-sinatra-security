@@ -29,7 +29,7 @@ module Sinatra
       def self.included(user)
         user.send :include, LoginField
         user.send :include, Password
-        user.send :include, Validations
+        # user.send :include, Validations
 
         user.extend Identification 
       end

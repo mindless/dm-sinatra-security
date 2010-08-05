@@ -17,6 +17,7 @@ module Sinatra
     #     # index :login
     #   end
     module LoginField
+      EMAIL_FORMAT = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
       # @example
       #   
       #   Sinatra::Security::LoginField.attr_name :username
@@ -41,8 +42,11 @@ module Sinatra
       attr_name :email
       
       def self.included(user)
-        user.attribute LoginField.attr_name
-        user.index     LoginField.attr_name
+        if @attr_name == :email
+          user.property LoginField.attr_name, String, :unique => true, :required => true, :format => EMAIL_FORMAT
+        else
+          user.property LoginField.attr_name, String, :unique => true, :required => true
+        end
       end
     end
   end

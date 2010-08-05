@@ -27,7 +27,7 @@ module Sinatra
       # @return [nil]  if no matching user found.
       def authenticate(login, password)
         if user = find_by_login(login)
-          if Sinatra::Security::Password::Hashing.check(password, user.crypted_password)
+          if Sinatra::Security::Password::Hashing.check(password, user.password)
             user
           end
         end
@@ -43,7 +43,7 @@ module Sinatra
       #
       # @see Sinatra::Security::LoginField::attr_name
       def find_by_login(login)
-        find(__LOGIN_FIELD__ => login).first
+        first(__LOGIN_FIELD__ => login)
       end
 
     protected

@@ -4,14 +4,13 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "sinatra-security"
+    gem.name = "dm-sinatra-security"
     gem.summary = %Q{Sinatra authentication extension}
-    gem.description = %Q{For use with Sinatra + Monk + OHM}
-    gem.email = "cyx.ucron@gmail.com"
-    gem.homepage = "http://github.com/sinefunc/sinatra-security"
+    gem.description = %Q{For use with Sinatra + DataMapper}
+    gem.email = "marco.palinar@gmail.com"
+    gem.homepage = "https://github.com/mindless/dm-sinatra-security"
     gem.authors = ["Cyril David"]
-    gem.add_dependency "sinatra", ">= 1"
-    gem.add_development_dependency "rack-test", ">= 0"
+    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError

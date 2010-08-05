@@ -22,19 +22,27 @@ module Sinatra
     # @see http://ohm.keyvalue.org for information about Ohm::Model.
     module Password
       def self.included(model)
-        model.attribute :crypted_password
-
-        model.send :attr_accessor, :password, :password_confirmation
+        model.property :password, String, :length => 192, :required => true
+        
+        model.send :attr_accessor, :password_confirmation
+        
+        model.send :validates_confirmation_of, :password
+        
+        model.before :save, :encrypt_password
+        
       end
+
+
+
 
     protected
       # @private internally called by Ohm after validation when persisting.
-      def write
+      
+      def encrypt_password
         if !password.to_s.empty?
-          write_local :crypted_password, Hashing.encrypt(password)
+          self.attributes = {:password => Hashing.encrypt(password)}
+          self.save
         end
-
-        super
       end
 
       module Hashing
