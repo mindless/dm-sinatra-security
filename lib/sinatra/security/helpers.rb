@@ -74,7 +74,7 @@ module Sinatra
       # @param [Proc] finder (defaults to User[id]) allows you to pass in a
       #               different finder method. 
       # @return [User] or alternatively, an instance of settings.login_user_class
-      def current_user(finder = lambda { |id| __USER__[id] })
+      def current_user(finder = lambda { |id| __USER__.get(id) })
         @current_user ||= finder.call(session[:user]) if session[:user]
       end
       
